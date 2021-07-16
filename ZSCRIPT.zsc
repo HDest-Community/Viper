@@ -209,15 +209,15 @@ class HDViper : HDHandgun
 			int NextMagLoaded = sb.GetNextLoadMag(HDMagAmmo(hpl.findinventory("HDViperMag")));
 			if (NextMagLoaded >= 7)
 			{
-				sb.DrawImage("ERMGA0", (-46, -3),sb. DI_SCREEN_CENTER_BOTTOM, scale: (2.0, 2.0));
+				sb.DrawImage("VPMGA0", (-46, -3),sb. DI_SCREEN_CENTER_BOTTOM, scale: (2.0, 2.0));
 			}
 			else if (NextMagLoaded <= 0)
 			{
-				sb.DrawImage("ERMGB0", (-46, -3), sb.DI_SCREEN_CENTER_BOTTOM, alpha: NextMagLoaded ? 0.6 : 1.0, scale: (2.0, 2.0));
+				sb.DrawImage("VPMGB0", (-46, -3), sb.DI_SCREEN_CENTER_BOTTOM, alpha: NextMagLoaded ? 0.6 : 1.0, scale: (2.0, 2.0));
 			}
 			else
 			{
-				sb.DrawBar("ERMGNORM", "ERMGGREY", NextMagLoaded, 7, (-46, -3), -1, sb.SHADER_VERT, sb.DI_SCREEN_CENTER_BOTTOM);
+				sb.DrawBar("VPMGNORM", "VPMGGREY", NextMagLoaded, 7, (-46, -3), -1, sb.SHADER_VERT, sb.DI_SCREEN_CENTER_BOTTOM);
 			}
 			sb.DrawNum(hpl.CountInv("HDViperMag"), -43, -8, sb.DI_SCREEN_CENTER_BOTTOM);
 		}
@@ -695,10 +695,10 @@ class HDViperMag : HDMagAmmo
 	States
 	{
 		Spawn:
-			ERMG A -1;
+			VPMG A -1;
 			Stop;
 		SpawnEmpty:
-			ERMG B -1
+			VPMG B -1
 			{
 				bROLLSPRITE = true;
 				bROLLCENTER = true;
