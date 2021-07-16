@@ -653,7 +653,7 @@ class HDViperMag : HDMagAmmo
 {
 	override string, string, name, double GetMagSprite(int thismagamt)
 	{
-		return (thismagamt > 0) ? "ERMGA0" : "ERMGB0", "PRNDA0", "HD50AEAmmo", 1.25;
+		return (thismagamt > 0) ? "VPMGA0" : "VPMGB0", "PRNDA0", "HD50AEAmmo", 1.25;
 	}
 
 	override void GetItemsThatUseThis()
