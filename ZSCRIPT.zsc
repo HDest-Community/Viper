@@ -374,7 +374,7 @@ class HDViper : HDHandgun
 			{
 				if (invoker.WeaponStatus[VPProp_Chamber] == 1)
 				{
-					A_EjectCasing('HDSpent50AE', 11, -random(79, 81), frandom(6.0, 6.5));
+					A_EjectCasing('HDSpent50AE', 11, -random(79, 81), frandom(6.0, 6.5), 0.78);
 					invoker.WeaponStatus[VPProp_Chamber] = 0;
 				}
 				
@@ -505,7 +505,7 @@ class HDViper : HDHandgun
 				invoker.WeaponStatus[VPProp_Chamber] = 0;
 				switch (Chamber)
 				{
-					case 1: A_EjectCasing('HDSpent50AE', 11, -random(79, 81), frandom(6.0, 6.5));
+					case 1: A_EjectCasing('HDSpent50AE', 11, -random(79, 81), frandom(6.0, 6.5), 0.78);
 					case 2: A_SpawnItemEx("HD50AEAmmo", cos(pitch * 12), 0, height - 9 - sin(pitch) * 12, 1, 2, 3, 0); break;
 				}
 
