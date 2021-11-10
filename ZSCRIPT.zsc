@@ -58,7 +58,6 @@ class HDViper : HDHandgun
 	enum ViperFlags
 	{
 		VPF_JustUnload = 1,
-		VPF_LightTrigger = 2,
 		VPF_HeavyFrame = 4,
 		VPF_ExtendedBarrel = 8
 	}
@@ -138,10 +137,6 @@ class HDViper : HDHandgun
 
 	override void LoadoutConfigure(string input)
 	{
-		if (GetLoadoutVar(input, "trigger", 1) > 0)
-		{
-			WeaponStatus[VPProp_Flags] |= VPF_LightTrigger;
-		}
 		if (GetLoadoutVar(input, "hframe", 1) > 0)
 		{
 			WeaponStatus[VPProp_Flags] |= VPF_HeavyFrame;
@@ -198,8 +193,7 @@ class HDViper : HDHandgun
 	{
 		string HFrameStr = WeaponStatus[VPProp_Flags] & VPF_HeavyFrame ? " heavy-framed" : "";
 		string ExBarrelStr = WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel ? " extended" : "";
-		string LTriggerStr = WeaponStatus[VPProp_Flags] & VPF_LightTrigger ? " with a lighter trigger" : "";
-		return String.Format("You got the%s%s 'Viper' .50 cal. handgun%s. Blast 'em.", HFrameStr, ExBarrelStr, LTriggerStr);
+		return String.Format("You got the%s%s 'Viper' .50 cal. handgun. Blast 'em.", HFrameStr, ExBarrelStr);
 	}
 
 	override void DrawHUDStuff(HDStatusBar sb, HDWeapon hdw, HDPlayerPawn hpl)
@@ -316,20 +310,6 @@ class HDViper : HDHandgun
 				{
 					HDPlayerPawn(self).gunbraced = false;
 				}
-				double ClimbMult = 1.0;
-				if (invoker.WeaponStatus[VPProp_Flags] & VPF_LightTrigger)
-				{
-					ClimbMult -= 0.5;
-				}
-				if (invoker.WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel)
-				{
-					ClimbMult -= 0.1;
-				}
-				if (invoker.WeaponStatus[VPProp_Flags] & VPF_HeavyFrame)
-				{
-					ClimbMult *= 0.75;
-				}
-				A_MuzzleClimb(-frandom(0.1, 0.2) * ClimbMult, -frandom(0.2, 0.4) * ClimbMult);
 			}
 			#### C 1 Offset(0, 36)
 			{
@@ -627,10 +607,6 @@ class ViperRandom : IdleDummy
 				}
 
 				HDF.TransferSpecials(self, wpn);
-				if (!random(0, 3))
-				{
-					wpn.WeaponStatus[wpn.VPProp_Flags] |= wpn.VPF_LightTrigger;
-				}
 				if (!random(0, 3))
 				{
 					wpn.WeaponStatus[wpn.VPProp_Flags] |= wpn.VPF_HeavyFrame;
