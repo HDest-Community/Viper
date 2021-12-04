@@ -1,6 +1,6 @@
 ### Important
 ---
-- This mod requires [AceCoreLib](https://gitlab.com/accensi/hd-addons/acecorelib) and [BulletLib](https://gitlab.com/accensi/hd-addons/hdbulletlib).
+- This mod requires [BulletLib](https://gitlab.com/accensi/hd-addons/hdbulletlib).
 
 ### Notes
 ---
