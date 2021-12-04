@@ -318,14 +318,9 @@ class HDViper : HDHandgun
 				A_StartSound("Viper/Fire", CHAN_WEAPON);
 
 				bool ExtBarrel = invoker.WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel;
-				bool HasScorpion = AceCore.CheckForItem(self, 'HDScorpion');
 
 				double VelMult = 1.0;
 				if (ExtBarrel)
-				{
-					VelMult += 0.15;
-				}
-				if (invoker.WeaponStatus[VPProp_Mag] == 0 && HasScorpion)
 				{
 					VelMult += 0.15;
 				}
@@ -335,10 +330,6 @@ class HDViper : HDHandgun
 
 				double ClimbMult = 1.0;
 				if (ExtBarrel)
-				{
-					ClimbMult -= 0.12;
-				}
-				if (HasScorpion)
 				{
 					ClimbMult -= 0.12;
 				}
@@ -631,20 +622,6 @@ class HDViperMag : HDMagAmmo
 	override void GetItemsThatUseThis()
 	{
 		ItemsThatUseThis.Push("HDViper");
-	}
-
-	override void DoEffect()
-	{
-		Super.DoEffect();
-
-		if (!owner)
-		{
-			return;
-		}
-
-		bool HasScorpion = AceCore.CheckForItem(owner, 'HDScorpion');
-		InsertTime = HasScorpion ? 7 : default.InsertTime;
-		ExtractTime = HasScorpion ? 4 : default.ExtractTime;
 	}
 
 	const EncMag = 12;
