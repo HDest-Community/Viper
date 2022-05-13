@@ -12,25 +12,25 @@ class ViperHandler : EventHandler
 		switch (e.Replacement.GetClassName())
 		{
 			case 'ShotgunReplaces':
-				if (random[viperrand]() <= 20)
+				if (random[viperrand]() < AceCore.GetScaledSpawnChance(0, 20))
 				{
 					e.Replacement = "ViperRandom";
 				}
 				break;
 			case 'HDPistol':
-				if (random[viperrand]() <= 128)
+				if (random[viperrand]() < AceCore.GetScaledSpawnChance(32, 128))
 				{
 					e.Replacement = "ViperRandom";
 				}
 				break;
 			case 'ShellBoxRandom':
-				if (random[viperrand]() <= 8)
+				if (random[viperrand]() < AceCore.GetScaledSpawnChance(2, 8))
 				{
 					e.Replacement = "HD50AEBoxPickup";
 				}
 				break;
 			case 'ClipMagPickup':
-				if (random[viperrand]() <= 24)
+				if (random[viperrand]() < AceCore.GetScaledSpawnChance(8, 24))
 				{
 					e.Replacement = "HDViperMag";
 				}
