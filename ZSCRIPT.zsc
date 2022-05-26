@@ -84,10 +84,10 @@ class HDViper : HDHandgun
 
 	override double GunMass()
 	{
-		double BaseMass = 10.5;
+		double BaseMass = 7.0;
 		if (WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel)
 		{
-			BaseMass += 1.5;
+			BaseMass += 1.0;
 		}
 		if (WeaponStatus[VPProp_Flags] & VPF_HeavyFrame)
 		{
@@ -282,9 +282,6 @@ class HDViper : HDHandgun
 			#### A 0 A_MagManager("HDViperMag");
 			Goto Ready;
 
-		AltFire:
-			Goto ChamberManual;
-
 		Fire:
 			VPRG # 0
 			{
@@ -460,20 +457,24 @@ class HDViper : HDHandgun
 			VPRG # 3 Offset(0, 34) A_UpdateSlideFrame();
 			VPRG # 4 Offset(0, 37)
 			{
-				A_MuzzleClimb(frandom(0.4, 0.5), -frandom(0.6, 0.8));
-				A_StartSound("Viper/SlideBack", 8);
-				int Chamber = invoker.WeaponStatus[VPProp_Chamber];
-				invoker.WeaponStatus[VPProp_Chamber] = 0;
-				switch (Chamber)
+				if (invoker.WeaponStatus[VPProp_Chamber] > 0)
 				{
-					case 1: A_EjectCasing('HDSpent50AE', 11, -random(79, 81), frandom(6.0, 6.5), 0.78);
-					case 2: A_SpawnItemEx('HD50AEAmmo', cos(pitch * 12), 0, height - 9 - sin(pitch) * 12, 1, 2, 3, 0); break;
+					A_MuzzleClimb(frandom(0.4, 0.5), -frandom(0.6, 0.8));
+					A_StartSound("Viper/SlideBack", 8);
+					int chamber = invoker.WeaponStatus[VPProp_Chamber];
+					invoker.WeaponStatus[VPProp_Chamber] = 0;
+					switch (Chamber)
+					{
+						case 1: A_EjectCasing('HDSpent50AE', 11, -random(79, 81), frandom(6.0, 6.5), 0.78);
+						case 2: A_SpawnItemEx('HD50AEAmmo', cos(pitch * 12), 0, height - 9 - sin(pitch) * 12, 1, 2, 3, 0); break;
+					}
 				}
 
 				if (invoker.WeaponStatus[VPProp_Mag] > 0)
 				{
 					invoker.WeaponStatus[VPProp_Chamber] = 2;
 					invoker.WeaponStatus[VPProp_Mag]--;
+					A_StartSound("Viper/SlideForward", 9);
 				}
 				A_UpdateSlideFrame();
 			}
