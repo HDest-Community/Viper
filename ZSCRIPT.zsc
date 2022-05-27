@@ -318,7 +318,7 @@ class HDViper : HDHandgun
 				}
 				HDBulletActor.FireBullet(self, "HDB_50AE", spread: 1.0, speedfactor: frandom(0.99, 1.03) * VelMult);
 				A_AlertMonsters();
-				A_ZoomRecoil(0.99);
+				A_ZoomRecoil(1.05);
 
 				double ClimbMult = 1.0;
 				if (ExtBarrel)
