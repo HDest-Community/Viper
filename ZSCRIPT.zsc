@@ -354,7 +354,7 @@ class HDViper : HDHandgun
 				}
 			}
 			VPRF C 1;
-			VPRG A 1;
+			VPRG A 0;
 			Goto Nope;
 
 		Reload:
