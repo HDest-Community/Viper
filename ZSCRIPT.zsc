@@ -26,7 +26,7 @@ class ViperHandler : EventHandler
 			case 'ShellBoxRandom':
 				if (random[viperrand]() < AceCore.GetScaledChance(2, 8, acl_spawnscale_min, acl_spawnscale_max))
 				{
-					e.Replacement = "HD50AEBoxPickup";
+					e.Replacement = "PB_50AMBoxPickup";
 				}
 				break;
 			case 'ClipMagPickup':
@@ -46,7 +46,7 @@ class ViperHandler : EventHandler
 			return;
 		}
 		
-		if (ViperAmmo.GetClass() == 'HD50AEAmmo')
+		if (ViperAmmo.GetClass() == 'HD50AM_Ammo')
 		{
 			ViperAmmo.ItemsThatUseThis.Push("HDViper");
 		}
@@ -102,7 +102,7 @@ class HDViper : HDHandgun
 		int Mag = WeaponStatus[VPProp_Mag];
 		if (Mag >= 0)
 		{
-			BaseBulk += HDViperMag.EncMagLoaded + Mag * HD50AEAmmo.EncRoundLoaded;
+			BaseBulk += HDViperMag.EncMagLoaded + Mag * ENC_50AM_LOADED;
 		}
 		if (WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel)
 		{
@@ -151,7 +151,7 @@ class HDViper : HDHandgun
 
 	override void ForceBasicAmmo()
 	{
-		owner.A_TakeInventory("HD50AEAmmo");
+		owner.A_TakeInventory("HD50AM_Ammo");
 		owner.A_TakeInventory("HDViperMag");
 		owner.A_GiveInventory("HDViperMag");
 	}
@@ -161,9 +161,9 @@ class HDViper : HDHandgun
 		if (owner)
 		{
 			amt = clamp(amt, 1, 10);
-			if (owner.CheckInventory("HD50AEAmmo", 1))
+			if (owner.CheckInventory("HD50AM_Ammo", 1))
 			{
-				owner.A_DropInventory("HD50AEAmmo", amt * 10);
+				owner.A_DropInventory("HD50AM_Ammo", amt * 10);
 			}
 			else
 			{
@@ -316,7 +316,7 @@ class HDViper : HDHandgun
 				{
 					VelMult += 0.15;
 				}
-				HDBulletActor.FireBullet(self, "HDB_50AE", spread: 1.0, speedfactor: frandom(0.99, 1.03) * VelMult);
+				HDBulletActor.FireBullet(self, "HDB_50AM", spread: 1.0, speedfactor: frandom(0.99, 1.03) * VelMult);
 				A_AlertMonsters();
 				A_ZoomRecoil(1.05);
 
@@ -337,7 +337,7 @@ class HDViper : HDHandgun
 			{
 				if (invoker.WeaponStatus[VPProp_Chamber] == 1)
 				{
-					A_EjectCasing('HDSpent50AE', 11, -random(79, 81), frandom(6.0, 6.5), 0.78);
+					A_EjectCasing('HDSpent50AM',frandom(-1,2),(frandom(0.2,0.3),-frandom(7,7.5),frandom(0,0.2)),(0,0,-2));
 					invoker.WeaponStatus[VPProp_Chamber] = 0;
 				}
 				
@@ -368,7 +368,7 @@ class HDViper : HDHandgun
 				}
 				else if (invoker.WeaponStatus[VPProp_Mag] <= 0 && (PressingUse() || noMags))
 				{
-					if (CheckInventory('HD50AEAmmo', 1))
+					if (CheckInventory('HD50AM_Ammo', 1))
 					{
 						SetWeaponState('LoadChamber');
 					}
@@ -465,8 +465,8 @@ class HDViper : HDHandgun
 					invoker.WeaponStatus[VPProp_Chamber] = 0;
 					switch (Chamber)
 					{
-						case 1: A_EjectCasing('HDSpent50AE', 11, -random(79, 81), frandom(6.0, 6.5), 0.78);
-						case 2: A_SpawnItemEx('HD50AEAmmo', cos(pitch * 12), 0, height - 9 - sin(pitch) * 12, 1, 2, 3, 0); break;
+						case 1: A_EjectCasing('HDSpent50AM',frandom(-1,2),(frandom(0.2,0.3),-frandom(7,7.5),frandom(0,0.2)),(0,0,-2));
+						case 2: A_SpawnItemEx('HD50AM_Ammo', cos(pitch * 12), 0, height - 9 - sin(pitch) * 12, 1, 2, 3, 0); break;
 					}
 				}
 
@@ -493,10 +493,10 @@ class HDViper : HDHandgun
 			#### C 2 Offset(8, 96);
 			#### C 3 Offset(6, 88)
 			{
-				if (CheckInventory("HD50AEAmmo", 1))
+				if (CheckInventory("HD50AM_Ammo", 1))
 				{
 					A_StartSound("Viper/SlideForward", 8);
-					A_TakeInventory('HD50AEAmmo', 1, TIF_NOTAKEINFINITE);
+					A_TakeInventory('HD50AM_Ammo', 1, TIF_NOTAKEINFINITE);
 					invoker.WeaponStatus[VPProp_Chamber] = 2;
 				}
 			}
@@ -544,7 +544,7 @@ class HDViperMag : HDMagAmmo
 {
 	override string, string, name, double GetMagSprite(int thismagamt)
 	{
-		return (thismagamt > 0) ? "VPMGA0" : "VPMGB0", "PRNDA0", "HD50AEAmmo", 1.25;
+		return (thismagamt > 0) ? "VPMGA0" : "VPMGB0", "PRNDA0", "HD50AM_Ammo", 1.25;
 	}
 
 	override void GetItemsThatUseThis()
@@ -561,12 +561,13 @@ class HDViperMag : HDMagAmmo
 		HDMagAmmo.MaxPerUnit 7;
 		HDMagAmmo.InsertTime 9;
 		HDMagAmmo.ExtractTime 6;
-		HDMagAmmo.RoundType "HD50AEAmmo";
-		HDMagAmmo.RoundBulk HD50AEAmmo.EncRoundLoaded;
+		HDMagAmmo.RoundType "HD50AM_Ammo";
+		//HDMagAmmo.RoundBulk ENC_50AM;
 		HDMagAmmo.MagBulk EncMagEmpty;
-		Tag ".50 AE magazine";
-		Inventory.PickupMessage "Picked up a .50 AE Viper magazine.";
-		HDPickup.RefId "50m";
+		Tag ".50 AM Viper magazine";
+		Inventory.PickupMessage "Picked up a .50 AM Viper magazine.";
+		HDPickup.RefId "vpm"; // viper mag
+		
 	}
 
 	States
