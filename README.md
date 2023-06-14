@@ -1,6 +1,6 @@
 ### Important
 ---
-- This mod requires [BulletLib](https://gitlab.com/accensi/hd-addons/hdbulletlib) and [AceCoreLib](https://gitlab.com/accensi/hd-addons/acecorelib).
+- This mod requires [BulletLib-Recasted](https://github.com/HDest-Community/HDBulletLib-Recasted) and [AceCoreLib](https://github.com/HDest-Community/AceCoreLib).
 - Supports ACL's spawn scaling.
 
 ### Notes
