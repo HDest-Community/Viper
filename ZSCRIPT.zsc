@@ -120,11 +120,11 @@ class HDViper : HDHandgun
 		string IconString = "";
 		if (WeaponStatus[VPProp_Chamber] > 0)
 		{
-			IconString = WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel ? "VPRXY0" : "VPRGY0";
+			IconString = WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel ? "VPRGY0" : "VPRGY0";
 		}
 		else
 		{
-			IconString = WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel ? "VPRXZ0" : "VPRGZ0";
+			IconString = WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel ? "VPRGZ0" : "VPRGZ0";
 		}
 		return IconString, 1.0;
 	}
@@ -258,8 +258,8 @@ class HDViper : HDHandgun
 			VPRR A 0; VPRE A 0;
 
 		Spawn:
-			VPRX Y 0 NoDelay A_JumpIf(invoker.WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel, 2);
-			VPRG Y 0;
+			VPRG A 0 NoDelay A_JumpIf(invoker.WeaponStatus[VPProp_Flags] & VPF_ExtendedBarrel, 2);
+			VPRG A 0;
 			#### # -1
 			{
 				frame = (invoker.WeaponStatus[VPProp_Chamber] == 0 ? 25 : 24);
@@ -303,7 +303,7 @@ class HDViper : HDHandgun
 					HDPlayerPawn(self).gunbraced = false;
 				}
 			}
-			VPRF A 1
+			VPRG  A 1
 			{
 				HDFlashAlpha(128);
 				A_Light1();
@@ -333,7 +333,7 @@ class HDViper : HDHandgun
 
 				invoker.WeaponStatus[VPProp_Chamber] = 1;
 			}
-			VPRF B 1
+			VPRG  B 1
 			{
 				if (invoker.WeaponStatus[VPProp_Chamber] == 1)
 				{
@@ -353,7 +353,7 @@ class HDViper : HDHandgun
 					invoker.WeaponStatus[VPProp_Mag]--;
 				}
 			}
-			VPRF C 1;
+			VPRG  C 1;
 			VPRG A 0;
 			Goto Nope;
 
