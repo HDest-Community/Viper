@@ -98,7 +98,7 @@ Sprite "VPRGA0", 71, 97
 {
 	XScale 1.100
 	YScale 1.300
-	Offset -136, -90
+	Offset -152, -125
 	Patch "VPRGA0", 0, 0
 }
 
@@ -106,19 +106,16 @@ Sprite "VPRGB0", 71, 97
 {
 	XScale 1.100
 	YScale 1.300
-	Offset -136, -90
+	Offset -152, -123
 	Patch "VPRGB0", 0, 0
 }
 
-Sprite "VPRGC0", 71, 97
+Sprite "VPRGC0", 83, 106
 {
 	XScale 1.100
 	YScale 1.300
-	Offset -124, -90
+	Offset -137, -113
 	Patch "VPRGC0", 0, 0
-	{
-		FlipX
-	}
 }
 
 Sprite "VPREA0", 170, 128
