@@ -353,7 +353,7 @@ class HDViper : HDHandgun
 					invoker.WeaponStatus[VPProp_Mag]--;
 				}
 			}
-			VPRG  C 1;
+			VPRG B 1;
 			VPRG A 0;
 			Goto Nope;
 
