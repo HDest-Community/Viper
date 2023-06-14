@@ -80,6 +80,10 @@ Sprite "VPRFB0", 182, 128
 	YScale 1.400
 	Offset -85, -120
 	Patch "VPRGC0", 0, 0
+	{
+		FlipX
+	}
+
 }
 
 Sprite "VPRFC0", 182, 128
@@ -90,7 +94,7 @@ Sprite "VPRFC0", 182, 128
 	Patch "VPRGB0", 0, 0
 }
 
-Sprite "VPRGA0", 182, 128
+Sprite "VPRGA0", 71, 97
 {
 	XScale 1.100
 	YScale 1.300
@@ -98,7 +102,7 @@ Sprite "VPRGA0", 182, 128
 	Patch "VPRGA0", 0, 0
 }
 
-Sprite "VPRGB0", 182, 128
+Sprite "VPRGB0", 71, 97
 {
 	XScale 1.100
 	YScale 1.300
@@ -106,12 +110,15 @@ Sprite "VPRGB0", 182, 128
 	Patch "VPRGB0", 0, 0
 }
 
-Sprite "VPRGC0", 182, 128
+Sprite "VPRGC0", 71, 97
 {
 	XScale 1.100
 	YScale 1.300
 	Offset -129, -125
 	Patch "VPRGC0", 0, 0
+	{
+		FlipX
+	}
 }
 
 Sprite "VPREA0", 170, 128
